@@ -21,10 +21,10 @@ def readDataSets(files):
     return data
 
 datasets = ['dataZero.csv', 'dataOne.csv', 'dataTwo.csv', 'dataThree.csv']
-data = readDataSets([f'{dataset}' for dataset in datasets])
+data = readDataSets(datasets)
 
 for dataset in datasets:
-    x, y = data[f'{dataset}']
+    x, y = data[dataset]
     print(f"From {dataset}:")
     print(f"Count of X: {zcount(x)}")
     print(f"Count of Y: {zcount(y)}")

@@ -1,6 +1,9 @@
 from typing import List
 
 def zmode(data: List[float]) -> float :
+    if len(data) == len(set(data)):
+        return None
+    
     freq = {}
     max_count = -1
     modes = []
