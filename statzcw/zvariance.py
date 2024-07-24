@@ -2,8 +2,7 @@ from typing import List
 from statzcw.zmean import zmean
 
 def zvariance(data: List[float]) -> float :
-    n = len(data) - 1
-    deviations = [(x - zmean(data)) ** 2 for x in data]
-
-    variance = sum(deviations) / n
+    mean = zmean(data)
+    deviations = [(x - mean) ** 2 for x in data]
+    variance = sum(deviations) / (len(data) - 1)
     return variance

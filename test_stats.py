@@ -4,6 +4,7 @@ from statzcw.stats import zcount, zmean, zmode, zmedian, zvariance, zstddev, zst
 from sys import argv
 from statzcw.read_data import readDataSets
 import unittest
+import math
 
 data0 = [1.0, 2.0, 3.0, 4.0, 5.0]
 data2 = [1.0, 2.0, 2.0, 4.0, 5.0]
@@ -81,12 +82,32 @@ class TestStatsFunctions(unittest.TestCase):
         self.assertAlmostEqual(round(zstddev(sample1), 5), expected1)
 
     def test_stderr(self):
-        sample = [-14.82381293, -0.29423447, -13.56067979, -1.6288903, -0.31632439,
-            0.53459687, -1.34069996, -1.61042692, -4.03220519, -0.24332097]
-        sample1 = [2.74, 1.23, 2.63, 2.22, 3, 1.98] 
+        sample = (1, 2, 5, 4, 8, 9, 12)
+        sample1 = (2.74, 1.23, 2.63, 2.22, 3, 1.98) 
+        sample2 = (-14.82381293, -0.29423447, -13.56067979, -1.6288903, -0.31632439,
+            0.53459687, -1.34069996, -1.61042692, -4.03220519, -0.24332097)
 
-        self.assertAlmostEqual(round(zstderr(sample), 5), 2.16936)
-        self.assertAlmostEqual(round(zstderr(sample1), 5), .25400)
+        stdev_sample = statistics.stdev(sample)
+        stdev_sample1 = statistics.stdev(sample1)
+        stdev_sample2 = statistics.stdev(sample2)
+
+        stderr = stdev_sample / math.sqrt(len(sample))
+        stderr1 = stdev_sample1 / math.sqrt(len(sample1))
+        stderr2 = stdev_sample2 / math.sqrt(len(sample2))
+        print(stderr)
+        print(stderr1)
+
+        self.assertAlmostEqual(zstderr(sample), stderr, places=5)
+        self.assertAlmostEqual(zstderr(sample1), stderr1, places=5)
+        self.assertAlmostEqual(zstderr(sample2), stderr2, places=5)
+
+    def test_corr(self):
+        x = [2.74, 1.23, 2.63, 2.22, 3, 1.98]
+        y = [-2, -4, -3, -1, -5, -6] 
+
+        expected = statistics.correlation(x, y)
+
+        self.assertAlmostEqual(zcorr(x, y), expected)
 
 
 
