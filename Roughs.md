@@ -108,7 +108,7 @@ so make a cov() function, and that needs to do something like this:
 
 ```
 sum = 0
-make sure the count or a and b are equal!
+make sure the count or a and e equal!
 then we can just use count(a)
 for i in range(0, count(a))
     sum += ((a[i] - mean(a)) * (b[i] - mean(b)))
