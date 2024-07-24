@@ -13,3 +13,4 @@ def cov(data_x: List[float], data_y: List[float]):
 def zcorr(data1: List[float], data2: List[float]) -> float :
     corr = cov(data1, data2) / (zstddev(data1) * zstddev(data2))
     return corr
+

@@ -3,9 +3,7 @@ from statzcw.zmean import zmean
 
 def zvariance(data: List[float]) -> float :
     n = len(data) - 1
-    deviations = []
-    for x in data:
-        deviations.append(abs(zmean(data)-x) ** 2) #abs not allow??
+    deviations = [(x - zmean(data)) ** 2 for x in data]
 
     variance = sum(deviations) / n
     return variance
